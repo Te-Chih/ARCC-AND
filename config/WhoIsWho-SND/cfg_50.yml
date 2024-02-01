@@ -1,0 +1,77 @@
+# Data
+dataset: 'WhoisWho-SND'
+raw_path: '../data/WhoisWho-SND/raw/'
+processed_path: '../data/WhoisWho-SND/process/'
+pretrain_model_path: '../data/WhoisWho-SND/pretrain_model'
+
+# raw data
+all_raw_pub_data: 'pubs_raw.json'
+
+
+# label data
+train_raw_data: 'train_author.json'
+valid_raw_data: 'valid_author.json'
+test_raw_data: 'test_author.json'
+
+
+# processed data
+
+# semantic emb
+semantic_emb_bert: 'bert_cls_embedding_epoch50_P_TKVB.json'
+semantic_emb_w2v: 'allPapersEmbeding_0_100_TVOKY.json'
+#all_semantic_emb_we: 'allPapersEmbeding_0_100.json'
+
+
+# df
+train_df: 'train_paper_label.csv'
+valid_df: 'eval_paper_label.csv'
+test_df: 'test_paper_label.csv'
+all_pid2name: 'all_pid2name.json'
+
+# adjacency  matrix
+train_adj_rule: 'nomax_train_adj_matrix_thr80.json'
+valid_adj_rule: 'nomax_valid_adj_matrix_thr80.json'
+test_adj_rule: 'nomax_test_adj_matrix_thr80.json'
+
+
+# relation embedding
+train_rel_emb_rule: 'allPaperRelationEmbedings_all_100_train_thr80.json'
+test_rel_emb_rule: 'allPaperRelationEmbedings_all_100_test_thr80.json'
+valid_rel_emb_rule: 'allPaperRelationEmbedings_all_100_valid_thr80.json'
+
+
+
+#relation embedding layer data
+all_pid_rule: "wiw_all_pid_rule.json"
+all_pid_to_idx_rule: "wiw_all_pid_to_idx_rule.json"
+sem_emb_vector_bert: "wiw_all_b50_sem_emb_vector_rule.json"
+sem_emb_vector_w2v: "wiw_all_wv_sem_emb_vector_rule.json"
+rel_emb_vector_rule: "wiw_all_rel_emb_vector_rule.json"
+
+
+# Output
+save_path: '../output/WhoisWho-SND'
+
+
+# training
+run_model: 'run'
+MAX_NUM: 2000
+seed: 2021
+acc_sim: 0.5
+hidden: 100
+dropout: 0.5
+batch_size: 1
+epochs: 150
+gcnLayer: 1
+temperature_content: 0.07
+temperature_structure: 0.07
+temperature_fusion: 0.07
+lossfac_content: 1.0
+lossfac_fusion: 1.0
+learning_rate: 0.0001
+low_sim_threshold: 0.45
+high_sim_threshold: 0.95
+metric_type: 'cosine'
+sem_freeze: 1
+rel_freeze: 0
+idf_threshold: 8

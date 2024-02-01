@@ -1,0 +1,71 @@
+# Data Path
+dataset: 'Aminer-18'
+raw_path: '../data/Aminer-18/raw'
+processed_path: '../data/Aminer-18/processed'
+pretrain_model_path: '../data/Aminer-18/pretrain_model'
+
+# raw data
+raw_data: 'pubs_raw.json'
+test_raw_data: 'name_to_pubs_test_100.json'
+train_raw_data: 'name_to_pubs_train_500.json'
+
+# processed data
+
+# semantic emb
+semantic_emb_bert: 'bert_cls_semantic_embedding_epoch50.json'
+semantic_emb_w2v: 'w2v_semantic_embedding_100.json'
+#all_semantic_emb_we: 'allPapersEmbeding_0_100.json'
+
+# df
+train_df: 'train_paper_label_400.csv'
+valid_df: 'valid_paper_label_100.csv'
+test_df: 'test_paper_label.csv'
+all_pid2name: 'all_pid2name.json'
+
+
+# adjacency  matrix
+train_adj_rule: 'train_adj_rule.json'
+valid_adj_rule: 'valid_adj_rule.json'
+test_adj_rule: 'test_adj_rule.json'
+# relation embedding
+train_rel_emb_rule: 'n2v_relation_embedings_train_100.json'
+valid_rel_emb_rule: 'n2v_relation_embedings_valid_100.json'
+test_rel_emb_rule: 'n2v_relation_embedings_test_100.json'
+
+
+# embedding layer data
+all_pid: "all_pid.json"
+all_pid_to_idx: "all_pid_to_idx.json"
+rel_emb_vector_rule: "rel_emb_vector_rule.json"
+sem_emb_vector_bert: "sem_emb_vector_bert.json"
+sem_emb_vector_w2v: "sem_emb_vector_w2v.json"
+
+
+
+
+# Output
+save_path: '../output/Aminer-18'
+
+
+# training
+run_model: 'run'
+seed: 2021
+acc_sim: 0.5
+hidden: 100
+dropout: 0.5
+batch_size: 1
+epochs: 150
+gcnLayer: 1
+temperature_content: 0.07
+temperature_structure: 0.07
+temperature_fusion: 0.07
+lossfac_content: 1.0
+lossfac_fusion: 1.0
+learning_rate: 0.0001
+low_sim_threshold: 0.45
+high_sim_threshold: 0.95
+metric_type: 'cosine'
+sem_freeze: 1
+rel_freeze: 0
+idf_threshold: 8
+

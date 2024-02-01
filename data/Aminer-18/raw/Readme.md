@@ -1,0 +1,3 @@
+For a fair comparison, we used the same [filtering strategy](https://www.aminer.cn/na-data). as the original paper[1].
+
+[1] Yutao Zhang, Fanjin Zhang, Peiran Yao, and Jie Tang. 2018. Name Disambiguation in AMiner: Clustering, Maintenance, and Human in the Loop. In Proceedings of the 24th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining (KDD '18). Association for Computing Machinery, New York, NY, USA, 1002–1011. https://doi.org/10.1145/3219819.3219859
