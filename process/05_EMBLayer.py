@@ -53,12 +53,16 @@ def produce_EmbeddingLayer():
     sem_emb_vector_bert = [0]*len(rel_pid_list)
     sem_emb_vector_w2v = [0]*len(rel_pid_list)
     pid_list = [0] * len(rel_pid_list)
-    for index, r_pid in enumerate(tqdm(rel_pid_list)):
+    for index, r_pid in enumerate(rel_pid_list):
         pid_list[index] = r_pid
         pid_to_idx[r_pid] = index
         rel_emb_vector[index] = all_rel_emb_list[r_pid]
-        sem_emb_vector_bert[index]= bert_sem_emb_list[r_pid]
-        sem_emb_vector_w2v[index] = w2v_sem_emb_list[r_pid]
+        if config['dataset'] == 'Aminer-18':
+            sem_emb_vector_bert[index]= bert_sem_emb_list[r_pid.split("-")[0]]
+            sem_emb_vector_w2v[index] = w2v_sem_emb_list[r_pid.split("-")[0]]
+        else:
+            sem_emb_vector_bert[index] = bert_sem_emb_list[r_pid]
+            sem_emb_vector_w2v[index] = w2v_sem_emb_list[r_pid]
 
 
 

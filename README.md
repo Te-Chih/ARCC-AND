@@ -18,7 +18,7 @@ Please download data:
 
 - WhoisWho-SND https://www.aminer.cn/billboard/whoiswho   (na-v1: From-Scratch Name Disambiguation )
 
-Unzip the file and Put the different datasets into the corresponding **raw** files.
+Unzip the file and put the different datasets into the corresponding **data/{dataset}/raw/** directory.
 
 The data directory is as follows:
 
@@ -35,15 +35,34 @@ The data directory is as follows:
           
 ## How to run
 
-####  Data Preprocessing
+####  Step1: Data Preprocessing
 ```
 cd $project_path
-./process.bash
+./01_process.bash
 ```
 
-> Provides download of pre-processed data, Unzip the file and Put the different datasets into the corresponding **processed** files.
-> pan.baidu.com
+For fast reproduction, you can skip the '01_process.bash' phase and use the data we processed.
 
-#### train and test model
-```./run.bash```
-> The result is in the output directory
+Download: https://pan.baidu.com/s/1u3tucycIKdmoA6DMgcEfyA?pwd=edb7 Password: edb7
+
+Unzip the files and place the different files into the **data/{dataset}/processed/** directory  under the corresponding dataset
+
+
+
+
+#### Step2: Training and testing models
+
+```
+cd $project_path
+./02_model.bash
+```
+
+> The result is in the **output** directory
+
+<!--
+## Citation
+If you find our work useful, please consider citing the following paper.
+```
+
+```
+-->

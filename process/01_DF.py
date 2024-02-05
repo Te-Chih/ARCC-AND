@@ -1,4 +1,5 @@
 import os
+import random
 import sys
 # Solving the problem of not being able to import your own packages under linux
 cur_path = os.path.abspath(os.path.dirname(__file__))
@@ -15,52 +16,57 @@ BasePath = os.path.abspath(os.path.dirname(__file__))
 # Current file name
 curFileName = os.path.basename(__file__).split('.')[0]
 
-train_raw_data_path = "{}/{}/{}".format(BasePath,config['raw_path'],config['train_raw_data'])
-valid_raw_data_path = "{}/{}/{}".format(BasePath,config['raw_path'],config['valid_raw_data'])
 
+train_raw_data_path = "{}/{}/{}".format(BasePath, config['raw_path'], config['train_raw_data'])
+valid_raw_data_path = "{}/{}/{}".format(BasePath, config['raw_path'], config['valid_raw_data'])
 test_raw_data_path = "{}/{}/{}".format(BasePath,config['raw_path'],config['test_raw_data'])
 
-all_pid2name_path = "{}/{}/{}".format(BasePath,config['processed_path'],config['all_pid2name'])
+
+# all_pid2name_path = "{}/{}/{}".format(BasePath,config['processed_path'],config['all_pid2name'])
 train_df_path = "{}/{}/{}".format(BasePath,config['processed_path'],config['train_df'])
 valid_df_path = "{}/{}/{}".format(BasePath,config['processed_path'],config['valid_df'])
 test_df_path = "{}/{}/{}".format(BasePath,config['processed_path'],config['test_df'])
 
+# train_and_valid_dataset = parseJson(train_and_valid_raw_data_path)
+# train_dataset = parseJson(train_raw_data_path)
+# valid_dataset = parseJson(valid_raw_data_path)
+# test_dataset = parseJson(test_raw_data_path)
 
-train_dataset = parseJson(train_raw_data_path)
-valid_dataset = parseJson(valid_raw_data_path)
-test_dataset = parseJson(test_raw_data_path)
 
-def generate_train_validation_dataframe():
-    paper_labeled = []
-    tid2label = {}
+def random_dic(dicts):
+    dict_key_ls = list(dicts.keys())
+    random.shuffle(dict_key_ls)
+    new_dic = {}
+    for key in dict_key_ls:
+        new_dic[key] = dicts.get(key)
+    return new_dic
+
+def split_train_eval():
+    train_and_valid_raw_data_path = "{}/{}/{}".format(BasePath, config['raw_path'], config['train_and_valid_raw_data'])
+    train_and_valid_dataset = parseJson(train_and_valid_raw_data_path)
+
+    dataset = random_dic(train_and_valid_dataset)
     counter = 0
-    for name, data in train_dataset.items():
-        for tid in data.keys():
-            if tid not in tid2label:
-                tid2label[tid] = counter
-                counter+=1
+    train_len = int(len(dataset) * 0.8)
+    train_dataset_new = {}
+    eval_dataset_new = {}
+    for k, v in dataset.items():
+        if counter < train_len:
+            train_dataset_new[k] = v
+        else:
+            eval_dataset_new[k] = v
+        counter+=1
+
+    print(len(train_dataset_new), len(eval_dataset_new))
+    saveJson(train_raw_data_path, train_dataset_new)
+    saveJson(valid_raw_data_path, eval_dataset_new)
 
 
-    for name, data in train_dataset.items():
-        for tid, paper_list in data.items():
-            for paper in paper_list:
-                dic = {
-                    "paperid":paper,
-                    "name": name,
-                    "tid": tid,
-                    "label": tid2label[tid]
-                }
-                paper_labeled.append(dic)
-    df = pd.DataFrame(paper_labeled)
-    df1 = df.sample(frac=0.8)  # Random sampling at 0.8
-    df2 = df[~df.index.isin(df1.index)]
-    df1['index'] =  range(len(df1))
-    df2['index'] =  range(len(df2))
-    df1.to_csv(train_df_path,index=False)
-    df2.to_csv(valid_df_path,index=False)
 
 
 def generate_train_dataframe():
+    train_dataset = parseJson(train_raw_data_path)
+
 
     paper_labeled = []
     index = 0
@@ -89,6 +95,7 @@ def generate_train_dataframe():
 
 
 def generate_valid_dataframe():
+    valid_dataset = parseJson(valid_raw_data_path)
 
     paper_labeled = []
     index = 0
@@ -117,6 +124,8 @@ def generate_valid_dataframe():
 
 
 def generate_test_dataframe():
+    test_dataset = parseJson(test_raw_data_path)
+
 
     paper_labeled = []
     index = 0
@@ -148,9 +157,8 @@ def generate_test_dataframe():
 
 if __name__ == '__main__':
     if config['dataset'] == 'Aminer-18':
-        generate_train_validation_dataframe()
-    else:
-        generate_train_dataframe()
-        generate_valid_dataframe()
+        split_train_eval()
 
+    generate_train_dataframe()
+    generate_valid_dataframe()
     generate_test_dataframe()

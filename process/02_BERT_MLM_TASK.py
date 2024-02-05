@@ -12,7 +12,6 @@ from src.util_training import setup_seed
 import os
 import torch
 import math
-import argparse
 
 
 # step1: parse config and add parse
@@ -95,9 +94,6 @@ def split_train_test():
 
 def train_bert_byMLM():
 
-
-
-    # 这里不是从零训练，而是在原有预训练的基础上增加数据进行预训练，因此不会从 config 导入模型
     tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased', use_fast=True,max_length=max_seq_length)
 
     model = AutoModelForMaskedLM.from_pretrained('bert-base-uncased')
@@ -156,31 +152,19 @@ def get_semantic_embedding_by_bert():
             return_attention_mask=True,  # Construct attn. masks.
             return_tensors='pt',  # Return pytorch tensors.
         )
-        # encoded_dict = encoded_dict.cuda()
         input_ids = encoded_dict['input_ids'].cuda()
-        # token_type_ids = encoded_dict['token_type_ids'].cuda()
         attention_mask_ids = encoded_dict['attention_mask'].cuda()
-
-
-        # tokens_tensor = input_ids.unsqueeze(0)
-        # segments_tensors = token_type_ids.unsqueeze(0)
-        # attention_mask_ids_tensors = attention_mask_ids.unsqueeze(0)
 
         out = bert1(input_ids=input_ids, attention_mask=attention_mask_ids)
         bert_embeding[paperId] = torch.squeeze(out['pooler_output']).to("cpu").tolist()
-        avg_bert_embeding[paperId] = torch.squeeze(out['last_hidden_state']).to("cpu").tolist()
-        # bert_embeding[paperId] = torch.squeeze(out['pooler_output']).to("cpu").tolist()
-        # Add the encoded sentence to the list.
-        # bert_tokenizer[pid] = {}
-        # bert_tokenizer[pid]["input_ids"] = torch.squeeze(encoded_dict['input_ids']).tolist()
-        # bert_tokenizer[pid]["attention_masks"] = torch.squeeze(encoded_dict['attention_mask']).tolist()
+
     saveJson(cls_semantic_embedding_bert_path, bert_embeding)
-    saveJson(avg_semantic_embedding_bert_path, avg_bert_embeding)
+    # saveJson(avg_semantic_embedding_bert_path, avg_bert_embeding)
 
 
 def main():
-    # extract_bert_corpus()
-    # split_train_test() # run only once
+    extract_bert_corpus() # run only once
+    split_train_test() # run only once
     train_bert_byMLM()
     get_semantic_embedding_by_bert()
 

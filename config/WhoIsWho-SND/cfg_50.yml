@@ -1,7 +1,7 @@
 # Data
 dataset: 'WhoisWho-SND'
 raw_path: '../data/WhoisWho-SND/raw/'
-processed_path: '../data/WhoisWho-SND/process/'
+processed_path: '../data/WhoisWho-SND/processed/'
 pretrain_model_path: '../data/WhoisWho-SND/pretrain_model'
 
 # raw data
@@ -42,8 +42,8 @@ valid_rel_emb_rule: 'allPaperRelationEmbedings_all_100_valid_thr80.json'
 
 
 #relation embedding layer data
-all_pid_rule: "wiw_all_pid_rule.json"
-all_pid_to_idx_rule: "wiw_all_pid_to_idx_rule.json"
+all_pid: "wiw_all_pid_rule.json"
+all_pid_to_idx: "wiw_all_pid_to_idx_rule.json"
 sem_emb_vector_bert: "wiw_all_b50_sem_emb_vector_rule.json"
 sem_emb_vector_w2v: "wiw_all_wv_sem_emb_vector_rule.json"
 rel_emb_vector_rule: "wiw_all_rel_emb_vector_rule.json"
@@ -54,7 +54,6 @@ save_path: '../output/WhoisWho-SND'
 
 
 # training
-run_model: 'run'
 MAX_NUM: 2000
 seed: 2021
 acc_sim: 0.5

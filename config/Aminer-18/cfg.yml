@@ -6,8 +6,13 @@ pretrain_model_path: '../data/Aminer-18/pretrain_model'
 
 # raw data
 raw_data: 'pubs_raw.json'
+
+#label data
+train_and_valid_raw_data: 'name_to_pubs_train_500.json'
+train_raw_data: 'name_to_pubs_train_400.json'
+valid_raw_data: 'name_to_pubs_valid_100.json'
 test_raw_data: 'name_to_pubs_test_100.json'
-train_raw_data: 'name_to_pubs_train_500.json'
+
 
 # processed data
 
@@ -48,7 +53,6 @@ save_path: '../output/Aminer-18'
 
 
 # training
-run_model: 'run'
 seed: 2021
 acc_sim: 0.5
 hidden: 100

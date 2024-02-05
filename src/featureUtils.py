@@ -1,6 +1,4 @@
-from itertools import chain
 import nltk
-from tqdm import tqdm
 from nltk.corpus import stopwords
 from transformers import BertTokenizer
 import re
@@ -18,12 +16,12 @@ stemmer = nltk.stem.PorterStemmer()
 
 
 def stem(word):
-    # 词干分析器从单词中去除形态词缀，只留下词干。
+    # The Stem Analyzer removes morphosyntactic affixes from words, leaving only the stem.
     return stemmer.stem(word)
 
 def aminer12_clean_sentence(text, stemming=False):
     """
-    lower -> remove punction -> remove stopwords -> stem(取词干)
+    lower -> remove punction -> remove stopwords -> stem()
     :param text:
     :param stemming:
     :return:
@@ -44,7 +42,7 @@ def aminer12_clean_sentence(text, stemming=False):
 
 def clean_sentence(text, stemming=False):
     """
-    lower -> remove punction -> remove stopwords -> stem(取词干)
+    lower -> remove punction -> remove stopwords -> stem()
     :param text:
     :param stemming:
     :return:
@@ -65,7 +63,6 @@ def clean_sentence(text, stemming=False):
 
 def clean_name(name):
     """
-    对机构名处理清晰，lower strip  replace(".|-") -> 用_进行词与词之间的链接
     :param name:
     :return:
     """
@@ -87,7 +84,7 @@ def transform_feature(data, f_name, k=1):
 
 def extract_common_features(paper):
     """
-    # 获取论文的title、abstract, venue,并进行clean
+    # Get the title, abstract, venue of the paper, and clean
     :param paper:
     :return:
     """
@@ -122,7 +119,6 @@ def extract_common_features(paper):
 
 def aminer12_extract_common_features(paper):
     """
-    # 获取论文的title、abstract, venue,并进行clean
     :param paper:
     :return:
     """

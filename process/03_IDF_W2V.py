@@ -20,7 +20,7 @@ setup_seed(config['seed'])
 BasePath = os.path.abspath(os.path.dirname(__file__))
 # Current file name
 curFileName = os.path.basename(__file__).split('.')[0]
-idf_courpus_path = "{}/{}/idf_courpus.json".format(BasePath,config['processed_path'])
+idf_courpus_path = "{}/{}/idf_corpus.json".format(BasePath,config['processed_path'])
 
 pubs_raw_path =  "{}/{}/{}".format(BasePath,config['raw_path'],config['raw_data'])
 wordIdf_path = "{}/{}/wordIdf.json".format(BasePath,config['processed_path'])

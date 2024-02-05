@@ -72,7 +72,7 @@ def draw_acc_loss_curve(resPath,savePath):
     plt.plot(epochs, train_accs, color='green', label='Training Acc')
     plt.plot(epochs, eval_accs, color='red', label='Validation Acc')
     # plt.title("ACC")
-    plt.legend()  # 绘制图例，默认在右上角
+    plt.legend()
     plt.xlabel('Epochs')
     plt.ylabel('Rate')
     plt.grid()
@@ -81,7 +81,7 @@ def draw_acc_loss_curve(resPath,savePath):
     plt.plot(epochs, train_loss, color='skyblue', label='Training Loss')
     plt.plot(epochs, eval_loss, color='blue', label='Validation Loss')
     # plt.title("LOSS")
-    plt.legend()  # 绘制图例，默认在右上角
+    plt.legend()
     plt.xlabel('Epochs')
     plt.ylabel('Rate')
     plt.grid()
@@ -92,7 +92,7 @@ def draw_acc_loss_curve(resPath,savePath):
     plt.plot(epochs, train_recs, color='blue', label='Train recall')
     plt.plot(epochs, train_f1s, color='red', label='Train f1')
     # plt.title("LOSS")
-    plt.legend()  # 绘制图例，默认在右上角
+    plt.legend()
     plt.xlabel('Epochs')
     plt.ylabel('Rate')
     plt.grid()
@@ -103,7 +103,7 @@ def draw_acc_loss_curve(resPath,savePath):
     plt.plot(epochs, eval_recs, color='blue', label='Validation recall')
     plt.plot(epochs, eval_f1s, color='red', label='Validation f1')
     # plt.title("LOSS")
-    plt.legend()  # 绘制图例，默认在右上角
+    plt.legend()
     plt.xlabel('Epochs')
     plt.ylabel('Rate')
     plt.grid()
