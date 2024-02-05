@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/751475367.svg)](https://zenodo.org/doi/10.5281/zenodo.10618825)
+
 # Author Name Disambiguation via Paper Association Refinement and Compositional Contrastive Embedding
 
 This is implementation of our WWWW'24 paper:
