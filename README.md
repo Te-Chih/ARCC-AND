@@ -22,7 +22,7 @@ Unzip the file and put the different datasets into the corresponding **data/{dat
 
 The data directory is as follows:
 
-    |- ARCC
+    |- ARCC-AND
        |- data
            |- Aminer-18
               |- raw
